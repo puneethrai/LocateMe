@@ -1,0 +1,7 @@
+node_modules/
+.sass-cache/
+.grunt/
+LocateMe/platforms
+LocateMe/hooks
+LocateMe/plugins
+LocateMe/www/main-build.js
