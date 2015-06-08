@@ -1,0 +1,11 @@
+{
+  "name": "OWE",
+  "version": "2.1.0",
+  "devDependencies": {
+    "cca": "^0.6.0",
+    "cordova": "^5.0.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-cordovacli": "^0.7.1"
+  }
+}
