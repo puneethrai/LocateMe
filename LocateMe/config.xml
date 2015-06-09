@@ -24,4 +24,22 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <preference name="SplashScreenDelay" value="5000" />
+    <icon src="res/icon.png" />
+    <platform name="android">
+        <!-- you can use any density that exists in the Android project -->
+        <splash src="res/screen/SplashScreenImage.png" density="land-hdpi"/>
+        <splash src="res/screen/SplashScreenImage.png" density="land-ldpi"/>
+        <splash src="res/screen/SplashScreenImage.png" density="land-mdpi"/>
+        <splash src="res/screen/SplashScreenImage.png" density="land-xhdpi"/>
+
+        <splash src="res/screen/SplashScreenImage.png" density="port-hdpi"/>
+        <splash src="res/screen/SplashScreenImage.png" density="port-ldpi"/>
+        <splash src="res/screen/SplashScreenImage.png" density="port-mdpi"/>
+        <splash src="res/screen/SplashScreenImage.png" density="port-xhdpi"/>
+    </platform>
+
+    <platform name="wp8">
+        <!-- images are determined by width and height. The following are supported -->
+        <splash src="res/screen/SplashScreenImage.png" width="768" height="1280"/>
+    </platform>
 </widget>

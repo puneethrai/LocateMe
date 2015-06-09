@@ -38,7 +38,10 @@ var app = {
             mapTypeControl: false,
             scaleControl: false,
             streetViewControl: true,
-            overviewMapControl: false
+            overviewMapControl: false,
+            streetViewControlOptions: {
+                position: google.maps.ControlPosition.LEFT_BOTTOM
+            }
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 

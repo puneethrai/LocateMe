@@ -15,7 +15,7 @@ module.exports = function (grunt) {
             cordova: {
                 options: {
                     command: ['create', 'platform', 'plugin', 'build'],
-                    platforms: ['browser'],
+                    platforms: ['browser', 'android', 'wp8'],
                     plugins: [],
                     path: 'LocateMe',
                     id: 'com.locate.me',
@@ -33,7 +33,7 @@ module.exports = function (grunt) {
                 options: {
                     command: 'platform',
                     action: 'add',
-                    platforms: ['browser']
+                    platforms: ['browser', 'android', 'wp8']
                 }
             },
             add_plugins: {
@@ -80,7 +80,14 @@ module.exports = function (grunt) {
                 options: {
                     command: 'emulate',
                     platforms: ['android'],
-                    args: ['--target', 'Nexus5']
+                    args: []
+                }
+            },
+            add_android: {
+                options: {
+                    command: 'platform',
+                    action: 'add',
+                    platforms: ['android']
                 }
             },
             run_wp8: {
@@ -112,5 +119,5 @@ module.exports = function (grunt) {
     });
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-cordovacli');
-    grunt.registerTask("prepare", ["cordovacli:add_plugins", "cordovacli:add_platforms"]);
+    grunt.registerTask("prepare", ["cordovacli:add_plugins", "cordovacli:add_android"]);
 };
