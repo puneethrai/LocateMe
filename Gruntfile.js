@@ -97,6 +97,13 @@ module.exports = function (grunt) {
                     args: ['--device']
                 }
             },
+            run_android: {
+                options: {
+                    command: 'run',
+                    platforms: ['android'],
+                    args: ['--device']
+                }
+            },
             run_browser: {
                 options: {
                     command: 'run',
