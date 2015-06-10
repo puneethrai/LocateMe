@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.locate.me" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.locate.me" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>LocateMe</name>
     <description>
         LocateMe an Hybrid App development to locate your address
@@ -42,4 +42,10 @@
         <!-- images are determined by width and height. The following are supported -->
         <splash src="res/screen/SplashScreenImage.png" width="768" height="1280"/>
     </platform>
+    <!-- A wildcard can be used to whitelist the entire network,
+     over HTTP and HTTPS.
+     *NOT RECOMMENDED* -->
+    <allow-navigation href="*" />
+    <!-- Don't block any requests -->
+    <access origin="*" />
 </widget>

@@ -6,20 +6,28 @@ var app = {
     deviceReady: false,
     initialize: function () {
         this.bindEvents();
-        var scriptUrl = "https://maps.googleapis.com/maps/api/js?region=GB",
-            head = document.getElementsByTagName("head")[0],
-            script = document.createElement('script');
+    },
+    loadGoogleAPI: function () {
+        var script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = scriptUrl;
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+            '&callback=initialize';
         script.onload = function () {
             app.scriptLoaded = true;
             app.getCurrentPosition();
             return true;
         };
-        script.onerror = function (e) {
-            alert('We need active internet connection for our application');
+        script.onerror = function () {
+            navigator.notification.confirm('We need active internet connection for our application. Retry?', function (index) {
+                if (index === 1) {
+                    script.remove ? script.remove() : script.removeNode();
+                    app.loadGoogleAPI();
+                } else {
+                    document.getElementById('Adddress').innerHTML = "Need active internet connection";
+                }
+            }, 'No Network');
         };
-        head.appendChild(script);
+        document.body.appendChild(script);
     },
     // Bind Event Listeners
     //
@@ -34,10 +42,10 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
         app.deviceReady = true;
-        app.getCurrentPosition();
+        app.loadGoogleAPI();
     },
-    getCurrentPosition: function(){
-        if(app.deviceReady && app.scriptLoaded) {
+    getCurrentPosition: function () {
+        if (app.deviceReady && app.scriptLoaded) {
             this.watchID = navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, {
                 maximumAge: 3000,
                 timeout: 10000,
@@ -93,7 +101,6 @@ var app = {
         geocoder.geocode({
             'latLng': myLatlng
         }, function (results, status) {
-            console.log(results, status);
             var printAddressDom = document.getElementById('Adddress');
             if (status === google.maps.GeocoderStatus.OK) {
                 if (results[1]) {
@@ -102,17 +109,18 @@ var app = {
                     printAddressDom.innerHTML = 'No results found';
                 }
             } else {
-                printAddressDom.innerHTML = 'Failed to retreive address due to: ' + status;
+                printAddressDom.innerHTML = 'Failed to retreive address ';
             }
         });
     },
     // onError Callback receives a PositionError object
     //
     onError: function (error) {
-        alert('code: ' + error.code + '\n' +
-            'message: ' + error.message + '\n');
+        navigator.notification.alert('code: ' + error.code + '\n' +
+            'message: ' + error.message + '\n', null, 'Location Error');
     }
 
 };
 
 app.initialize();
+window.initialize = app.getCurrentPosition;
