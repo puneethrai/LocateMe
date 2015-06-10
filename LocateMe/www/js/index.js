@@ -4,6 +4,18 @@ var app = {
     // Application Constructor
     initialize: function () {
         this.bindEvents();
+        var scriptUrl = "https://maps.googleapis.com/maps/api/js?region=GB",
+            head = document.getElementsByTagName("head")[0],
+            script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = scriptUrl;
+        script.onload = function () {
+            return true;
+        };
+        script.onerror = function (e) {
+            alert('We need active internet connection for our application');
+        };
+        head.appendChild(script);
     },
     // Bind Event Listeners
     //
