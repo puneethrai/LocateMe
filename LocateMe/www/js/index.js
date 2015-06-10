@@ -2,6 +2,8 @@
 /*jslint browser:true*/
 var app = {
     // Application Constructor
+    scriptLoaded: false,
+    deviceReady: false,
     initialize: function () {
         this.bindEvents();
         var scriptUrl = "https://maps.googleapis.com/maps/api/js?region=GB",
@@ -10,6 +12,8 @@ var app = {
         script.type = 'text/javascript';
         script.src = scriptUrl;
         script.onload = function () {
+            app.scriptLoaded = true;
+            app.getCurrentPosition();
             return true;
         };
         script.onerror = function (e) {
@@ -29,12 +33,17 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-        // Options: throw an error if no update is received every 30 seconds.
-        this.watchID = navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, {
-            maximumAge: 3000,
-            timeout: 10000,
-            enableHighAccuracy: true
-        });
+        app.deviceReady = true;
+        app.getCurrentPosition();
+    },
+    getCurrentPosition: function(){
+        if(app.deviceReady && app.scriptLoaded) {
+            this.watchID = navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, {
+                maximumAge: 3000,
+                timeout: 10000,
+                enableHighAccuracy: true
+            });
+        }
     },
     // onSuccess Callback
     //   This method accepts a `Position` object, which contains
