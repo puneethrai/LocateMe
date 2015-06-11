@@ -10,8 +10,7 @@ var app = {
     loadGoogleAPI: function () {
         var script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-            '&callback=initialize';
+        script.src = 'https://maps.googleapis.com/maps/api/js?region=GB&callback=initialize';
         script.onload = function () {
             app.scriptLoaded = true;
             app.getCurrentPosition();
